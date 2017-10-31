@@ -8,10 +8,12 @@ import {
   Text,
   View,
   Model,
+  Sound,
   Animated
 } from 'react-vr';
 
 import { Easing } from 'react-native';
+import MainMenu from './Components/Scenes/MainMenu.js';
 
 export default class ButterflyVR extends React.Component {
   constructor() {
@@ -47,26 +49,14 @@ spinAnimation() {
 
     return (
       <View>
-        <Pano source={asset('360view.jpg')}/>
-        <Text
-          style={{
-            fontSize: 0.4,
-            color: this.state.textColor,
-            fontWeight: '400',
-            layoutOrigin: [0.5, 0.5],
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            transform: [{rotateY : 0},
-                        {translate: [0, 1, -3]},
-                        {scale : 0.91},],
-          }}
-          onEnter={() => this.setState({textColor: 'black'})}
-          onExit={() => this.setState({textColor: 'white'})}>
-          Welcome To Butterfly
-
-        </Text>
+        <Pano source={asset('360view.jpg')}>
+        <Sound
+		    volume={0.8}
+		    loop = {true}
+		    source={{mp3: asset('')}}
+		  /> 
+        </Pano>
+        <MainMenu/>
         <AnimatedModel
 		  source={{
 		    obj: asset('butterfly.obj'),
