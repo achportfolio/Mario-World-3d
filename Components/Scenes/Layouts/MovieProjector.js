@@ -5,8 +5,12 @@ import {
   Video,
   View
 } from 'react-vr';
-import Movie from './Elements/Movie.js';
 //Layout
+
+import Movie from './Elements/Movie.js';
+import Title from './Elements/Title.js';
+import Button from './Elements/Button.js';
+
 class MovieProjector extends React.Component {
   render() {
     return (
@@ -19,7 +23,12 @@ class MovieProjector extends React.Component {
         layoutOrigin: [0.5, 0.5],
         transform: [{translate: [0, 0, -5]}]
       }}>
-        <Movie/>
+      <Title text={this.props.text}/>
+      <Button buttonText={this.props.buttonText}
+      updateScene={this.props.updateScene} scene={this.props.scene}/>
+
+      <Movie text={this.props.text} buttonText={this.props.buttonText} 
+        updateScene={this.props.updateScene} scene={this.props.scene}/>
       </View>
     )
   }

@@ -3,12 +3,15 @@ import {
   View,
   Video
 } from 'react-vr';
-import MovieProjector from './Layouts/MovieProjector.js';
 //Scene
+
+import MovieProjector from './Layouts/MovieProjector.js';
+
 class MovieTheater extends React.Component {
   render() {
     return (
-      <MovieProjector/>
+      <MovieProjector text={this.props.text} buttonText={this.props.buttonText} 
+        updateScene={this.props.updateScene} scene={this.props.scene}/>
     )
   }
 }

@@ -4,9 +4,12 @@ import React from 'react';
 import {
   Video,
   View,
+  Text,
+  VrButton,
   asset
 } from 'react-vr';
 //Element
+
 class Movie extends React.Component {
   render() {
     return (

@@ -16,20 +16,22 @@ import { Easing } from 'react-native';
 import MainMenu from './Components/Scenes/MainMenu.js';
 import SceneSelect from './Components/Scenes/SceneSelect.js';
 import MovieTheater from './Components/Scenes/MovieTheater.js';
+import ButterflyModel from './Components/Models/ButterflyModel.js'
 
 export default class ButterflyVR extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      textColor: 'white',
       mainMenu: true, 
-      SceneSelect: false,
-      spin: new Animated.Value(0)};
+      SceneSelect: false};
   }
 
 updateScene(scene) {
   switch(scene) {
+    case 1: 
+      this.setState({mainMenu: true, sceneSelect: false});
+      break;
     case 2:
       this.setState({mainMenu: false, sceneSelect: true});
       break;
@@ -39,30 +41,7 @@ updateScene(scene) {
   }
 }
 
-  componentDidMount() {
-  this.spinAnimation();
-}
-spinAnimation() {
-  this.state.spin.setValue(0);
-  Animated.timing(
-    this.state.spin,
-    {
-     toValue: 360,
-     duration: 5500,
-     easing: Easing.ease
-    }
-  ).start( () => this.spinAnimation() );
-}
-
-
   render() {
-    const spin = this.state.spin.interpolate({
-	    inputRange: [0, 360],
-	    outputRange: ['0deg', '360deg']
-    });
-
-    const AnimatedModel = Animated.createAnimatedComponent(Model);
-
     const mainMenu = this.state.mainMenu;
     const sceneSelect = this.state.sceneSelect;
 
@@ -78,31 +57,19 @@ spinAnimation() {
 
         {
           mainMenu ?(
-            <MainMenu text={"Butterfly Movie Theater"} buttonText={"Select a film"}
+            <MainMenu text={"Butterfly / No Signal"} buttonText={"Select Song"}
             updateScene={this.updateScene.bind(this)} scene={1}/>
           ) : (
-            sceneSelect ? (<SceneSelect text={"Scene Select"} buttonText={"Static"}
+            sceneSelect ? (<SceneSelect text={"Song Select"} buttonText={"Static"}
               updateScene={this.updateScene.bind(this)} scene={2}/>
             ) : (
-                  <MovieTheater/>
+                  <MovieTheater text={"Don't forget the love"} buttonText={"back"}
+                  updateScene={this.updateScene.bind(this)} scene={3}/>
             )
           ) 
         }
 
-        <AnimatedModel
-    		  source={{
-    		    obj: asset('butterfly.obj'),
-    		    mtl: asset('butterfly.mtl')
-    		}}
-
-    		style={{
-    			transform: [
-    			      {translate: [0, -7, -85]},
-        			  {rotate: spin}
-    			    ]
-    	    }}
-    	    texture={"assets/butterfly.png"}
-    		/>
+        <ButterflyModel/>
       </View>
     );
   }
