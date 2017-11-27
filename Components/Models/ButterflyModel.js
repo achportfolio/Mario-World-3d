@@ -15,7 +15,7 @@ class ButterflyModel extends React.Component {
   constructor() {
   	super();
 
-  	this.state= {hover: new Animated.Value(0)};
+  	this.state= {hover: new Animated.Value(0)}
   }
 
   componentDidMount() {
@@ -24,32 +24,28 @@ class ButterflyModel extends React.Component {
 
   hoverAnimation() {
 	  this.state.hover.setValue(-7);
-	  Animated.sequence([
-	  	Animated.timing(
-		    this.state.hover,
-		    {
-		     toValue: -50,
-		     duration: 2200,
-		     easing: Easing.linear
-		    }
-	    ),
+    	Animated.sequence([
+            Animated.timing(
+      		    this.state.hover,
+      		    {
+      		     toValue: -50,
+      		     duration: 2200,
+      		     easing: Easing.linear
+      		    }
+      	    ),
 
-	    Animated.timing(
-		    this.state.hover,
-		    {
-		     toValue: -7,
-		     duration: 2200,
-		     easing: Easing.linear
-		    }
-	    )
-	  ]).start( () => this.hoverAnimation() );
+      	    Animated.timing(
+      		    this.state.hover,
+      		    {
+      		     toValue: -7,
+      		     duration: 2200,
+      		     easing: Easing.linear
+      		    }
+      	    )
+      ]).start( () => this.hoverAnimation() );
   }
 
   render() {
-  	const spin = this.state.hover.interpolate({
-	    inputRange: [0, 200],
-	    outputRange: [-100, 100]
-    });
     const AnimatedModel = Animated.createAnimatedComponent(Model);
 
     return (
@@ -60,8 +56,8 @@ class ButterflyModel extends React.Component {
     		}}
 
     		style={{
-    			transform: [
-    			      {translateX: -25},
+          transform: [
+    			      {translateX: -85},
     			      {translateY: this.state.hover},
     			      {translateZ: -85}
     			    ]

@@ -8,45 +8,48 @@ import {
 } from 'react-vr';
 //Element
 
-import { Easing } from 'react-native';
+import {Easing} from 'react-native';
 
 class Title extends React.Component {
   constructor() {
     super();
-    this.state = {fadeSlide: new Animated.Value(0)};
+    this.state = {slideLeft:new Animated.Value(-1), fadeIn: new Animated.Value(0)}
   }
-
+  
   componentDidMount() {
-    Animated.timing(
-        this.state.fadeSlide,
-        {
-          toValue: 1,
-          duration: 1000,
-          delay: 1000,
-          easing: Easing.bounce
-        }
-      ).start();
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(
+            this.state.slideLeft,{
+              toValue: 0,
+              duration: 2000,
+              easing: Easing.ease
+            }
+          ),
+        Animated.timing(
+            this.state.fadeIn,{
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.ease
+            }
+          )
+     ])
+   ]).start();
   }
 
   render() {
     return (
-      <View style={{ margin: 0.1, height: 0.5}}>
-        <Animated.Text
-          style={{
-            fontSize: 0.5,
-            fontWeight: '400',
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            color: 'black',
-            opacity: this.state.fadeSlide,
-            transform: [
-              {translateY: this.state.fadeSlide.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1.5, 0]
-              })}
-            ]
-          }}>
-          {this.props.text}
+      <View style={{ margin: 0.1}}>
+        <Animated.Text style={{
+          fontSize: 0.25, 
+          textAlign: 'center', 
+          color: "#FFFFFF",
+          opacity: this.state.fadeIn,
+          transform: [
+            {translateX: this.state.slideLeft}
+          ]
+        }}>
+        Butterfly Video
         </Animated.Text>
       </View>
     )
