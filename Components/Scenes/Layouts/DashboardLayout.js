@@ -23,7 +23,9 @@ constructor(props) {
     color1: "#A482DF", 
     color2: "#DBDAF1",
     text: this.props.text,
-    borderWidths: [0, 0, 0, 0, 0, 0]
+    borderWidths: [0, 0, 0, 0, 0, 0],
+    environments: ["title-background.jpg", "dashboard-background.jpg", "Arizona.jpg", "Hawaii.jpg", "New Hampshire.jpg", "Texas.jpg"],
+    stage: 1
   };
 }
 
@@ -78,7 +80,7 @@ switch (input) {
 }
 
   updateScene() {
-  this.setState({color1: "#DBDAF1", color2: "#A482DF", text: "Watch Video"});
+  this.setState({color1: "#DBDAF1", color2: "#A482DF", text: "Watch Video", stage: 2});
 }
 
   render() {
@@ -96,8 +98,12 @@ switch (input) {
           marginTop: -0.3
         }}>
           <MenuButtons />
-          <TileButtons updateStage={this.updateStage.bind(this)}
-          borderWidths={this.state.borderWidths}/>
+          <TileButtons 
+            stage={this.state.stage}
+            environments={this.state.environments}
+            previews={this.props.previews} 
+            updateStage={this.updateStage.bind(this)}
+            borderWidths={this.state.borderWidths}/>
           <ProgressCircles color1={this.state.color1} color2={this.state.color2}/>
         </Animated.View>
 

@@ -17,7 +17,8 @@ class Dashboard extends React.Component {
     return (
         <View>
           <Pano source={asset('360vr2.jpg')}/>
-          <DashboardLayout text={this.props.text}/>
+          <DashboardLayout captureSelection={this.props.captureSelection} 
+          previews={this.props.previews} text={this.props.text}/>
         </View>
       )
   }
