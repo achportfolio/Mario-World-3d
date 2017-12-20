@@ -20,7 +20,8 @@ import axios from 'react-native-axios';
 export default class ButterflyVR extends React.Component {
   constructor() {
     super();
-    this.state={previews: "", IDs: "", selectedStreamID: "", selectedEnv: ""}
+    this.state={scene: 1, previews: "", IDs: "", selectedStreamID: "", selectedEnv: "",
+    environments: ["title-background.jpg", "dashboard-background.jpg", "Arizona.jpg", "Hawaii.jpg", "New Hampshire.jpg", "Texas.jpg"]};
   }
 
   componentWillMount() {
@@ -44,36 +45,71 @@ export default class ButterflyVR extends React.Component {
 
   gatherStreamIDs(response) {
     const IDs = response.data.featured.map(function(feat) {
-      return feat.stream._id;
+      return feat.stream.channel.name;
     });
     this.setState({IDs: IDs});
   }
 
-  captureSelection(stage, value) {
-    switch (stage) {
-      case 1:
-        this.setState({selectedStreamID: value});
-        break;
-      case 2:
-        this.setState({selectedEnv: value});
-        break;
-    }
+  changeScenes(nextScene, selectionIndex) {
+  switch (nextScene) {
+    case 1:
+      this.setState({scene: 1});
+      break;
+    case 2:
+      this.setState({scene: 2});
+      break;
+    case 3:
+      this.captureSelection(2, selectionIndex);
+      this.setState({scene: 3});
+      break;
   }
+}
+
+  captureSelection(stage, value) {
+  switch (stage) {
+    case 1:
+      this.setState({selectedStreamID: this.state.IDs[value-1]});
+      break;
+    case 2:
+      this.setState({selectedEnv: this.state.environments[value-1]});
+      break;
+  }
+}
 
   render() {
-    // <TitleScene showButton={true} text={"Watch a video"}/>
-    // <VideoPlayer streamID={this.state.selectedStreamID} 
-    //env={this.state.selectedEnv} showButton={true} text={"Back to Dashboard"}/>
-    // <ButterflyModel/>
+    const scene = this.state.scene;
     return (
-      <View>
-        <Dashboard 
-          captureSelection={this.captureSelection.bind(this)} 
-          previews={this.state.previews}
-          showButton={false}
-          text={"Select Environment"}
+        <View>
+      {scene === 1 ? (
+        <TitleScene
+          showButton={true}
+          text={"Watch a Video"}
+          changeScenes={this.changeScenes.bind(this)}
+          scene={this.state.scene}
         />
-      </View>
+      ) : (
+        scene === 2 ? (
+          <Dashboard
+            captureSelection={this.captureSelection.bind(this)}
+            previews={this.state.previews}
+            environments={this.state.environments}
+            showButton={false}
+            text={"Select Environment"}
+            changeScenes={this.changeScenes.bind(this)}
+            scene={this.state.scene}
+          />
+        ) : (
+          <VideoPlayer
+            streamID={this.state.selectedStreamID}
+            env={this.state.selectedEnv}
+            showButton={true}
+            text={"Back to Dashboard"}
+            changeScenes={this.changeScenes.bind(this)}
+            scene={this.state.scene}
+          />
+        )
+      )}
+    </View>
     );
   }
 };

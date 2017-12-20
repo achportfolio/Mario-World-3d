@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Video,
   View,
+  Text,
   VrButton
 } from 'react-vr';
 //Layout
@@ -24,7 +25,12 @@ class TitleLayout extends React.Component {
         transform: [{translate: [0, 0, -3]}]
       }}>
         <Title/>
-        <Button showButton={this.props.showButton} text={this.props.text}/>
+        <Button
+          showButton={this.props.showButton}
+          text={this.props.text}
+          changeScenes={this.props.changeScenes}
+          scene={this.props.scene}
+        />
       </View>
     )
   }

@@ -45,6 +45,22 @@ class Button extends React.Component {
   render() {
     
     const showButton = this.props.showButton;
+    const currentScene = this.props.scene;
+    let nextScene;
+    switch (currentScene) {
+      case 1:
+        nextScene = 2;
+        break;
+      case 2:
+        nextScene = 3;
+        break;
+      case 3:
+        nextScene = 1;
+        break;
+    }
+
+    const stage = this.props.stage;
+    const selectionIndex = this.props.selectionIndex;
 
     return (
       <View>
@@ -61,17 +77,43 @@ class Button extends React.Component {
                   {translateX:this.state.slideRight}
             ]
           }}>
-            <VrButton onClick={this.props.updateScene}>
-              <Text style={{
-                fontSize:0.2, 
-                textAlign: 'center', 
-                color: "#FFFFFF"
-              }}>
+            {currentScene === 2 ? (
+              <VrButton
+                onClick={
+                  () => {
+                    switch (stage) {
+                      case 1:
+                        this.props.updateScene();
+                        break;
+                      case 2:
+                        this.props.changeScenes(nextScene, selectionIndex);
+                    }
+                  }
+                }
+              >
+                <Text
+                  style={{
+                    fontSize: 0.2,
+                    textAlign: 'center',
+                    color: "#FFFFFF"
+                  }}>
                 {this.props.text}
-              </Text>
-            </VrButton>
+                </Text>
+              </VrButton>
+            ) : (
+              <VrButton onClick={() => this.props.changeScenes(nextScene)}>
+                <Text
+                  style={{
+                    fontSize: 0.2,
+                    textAlign: 'center',
+                    color: "#FFFFFF"
+                  }}>
+                {this.props.text}
+                </Text>
+              </VrButton>
+            )}
           </Animated.View>
-          ) : (
+          ) :(
             <View></View>
           )}
       </View>

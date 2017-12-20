@@ -23,7 +23,7 @@ class VideoPlayerLayout extends React.Component {
               layoutOrigin: [0.5, 0.5],
               transform: [{translate: [0, 0, -5]}]
             }}>
-            <VideoElement/>
+            <VideoElement streamURL={this.props.streamURL}/>
             </View>
           <View style={{
               flex: 1,
@@ -33,7 +33,12 @@ class VideoPlayerLayout extends React.Component {
               layoutOrigin: [0.5, 0.5],
               transform: [{translate: [0, 3.5, 5]}, {rotateY: -180}]
             }}>
-            <Button showButton={this.props.showButton} text={this.props.text}/>
+            <Button
+              showButton={this.props.showButton}
+              text={this.props.text}
+              changeScenes={this.props.changeScenes}
+              scene={this.props.scene}
+            />
             </View>
       </View>
         </View>

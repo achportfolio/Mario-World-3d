@@ -23,8 +23,8 @@ constructor(props) {
     color1: "#A482DF", 
     color2: "#DBDAF1",
     text: this.props.text,
+    selectionIndex: "",
     borderWidths: [0, 0, 0, 0, 0, 0],
-    environments: ["title-background.jpg", "dashboard-background.jpg", "Arizona.jpg", "Hawaii.jpg", "New Hampshire.jpg", "Texas.jpg"],
     stage: 1
   };
 }
@@ -59,27 +59,28 @@ componentDidMount() {
 
 switch (input) {
     case 1:
-      this.setState({borderWidths: [0.05, 0, 0, 0, 0, 0]});
+      this.setState({borderWidths: [0.05, 0, 0, 0, 0, 0], selectionIndex: 1});
       break;
     case 2:
-      this.setState({borderWidths: [0, 0.05, 0, 0, 0, 0]});
+      this.setState({borderWidths: [0, 0.05, 0, 0, 0, 0], selectionIndex: 2});
       break;
     case 3:
-      this.setState({borderWidths: [0, 0, 0.05, 0, 0, 0]});
+      this.setState({borderWidths: [0, 0, 0.05, 0, 0, 0], selectionIndex: 3});
       break;
     case 4:
-      this.setState({borderWidths: [0, 0, 0, 0.05, 0, 0]});
+      this.setState({borderWidths: [0, 0, 0, 0.05, 0, 0], selectionIndex: 4});
       break;
     case 5:
-      this.setState({borderWidths: [0, 0, 0, 0, 0.05, 0]});
+      this.setState({borderWidths: [0, 0, 0, 0, 0.05, 0], selectionIndex: 5});
       break;
     case 6:
-      this.setState({borderWidths: [0, 0, 0, 0, 0, 0.05]});
+      this.setState({borderWidths: [0, 0, 0, 0, 0, 0.05], selectionIndex: 6});
       break;
   }
 }
 
   updateScene() {
+  this.props.captureSelection(this.state.stage, this.state.selectionIndex);
   this.setState({color1: "#DBDAF1", color2: "#A482DF", text: "Watch Video", stage: 2});
 }
 
@@ -98,12 +99,13 @@ switch (input) {
           marginTop: -0.3
         }}>
           <MenuButtons />
-          <TileButtons 
+          <TileButtons
             stage={this.state.stage}
-            environments={this.state.environments}
-            previews={this.props.previews} 
+            environments={this.props.environments}
+            previews={this.props.previews}
             updateStage={this.updateStage.bind(this)}
-            borderWidths={this.state.borderWidths}/>
+            borderWidths={this.state.borderWidths}
+          />
           <ProgressCircles color1={this.state.color1} color2={this.state.color2}/>
         </Animated.View>
 
@@ -116,8 +118,15 @@ switch (input) {
           transform: [{translate: [0, 0, -3]}],
           marginTop: -0.7
         }}>
-          <Button updateScene={this.updateScene.bind(this)} 
-          showButton={this.state.showButton} text={this.state.text}/>
+          <Button
+            updateScene={this.updateScene.bind(this)}
+            showButton={this.state.showButton}
+            text={this.state.text}
+            changeScenes={this.props.changeScenes}
+            stage={this.state.stage}
+            scene={this.props.scene}
+            selectionIndex={this.state.selectionIndex}
+          />
         </View>
       </View>
     )

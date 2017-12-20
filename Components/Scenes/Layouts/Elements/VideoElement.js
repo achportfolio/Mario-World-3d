@@ -32,7 +32,7 @@ class VideoElement extends React.Component {
   render() {
     return (
       <Animated.View style={{ margin: 0.1, height: 4, opacity: this.state.fadeIn}}>
-        <Video style={{height: 4}} source={asset('happyDropsStatic.mp4')} />
+        <Video style={{height: 4}} source={{uri: this.props.streamURL}} />
       </Animated.View>
       )
   }
