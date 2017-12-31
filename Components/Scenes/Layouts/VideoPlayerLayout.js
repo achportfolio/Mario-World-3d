@@ -23,7 +23,6 @@ class VideoPlayerLayout extends React.Component {
               layoutOrigin: [0.5, 0.5],
               transform: [{translate: [0, 0, -5]}]
             }}>
-            <VideoElement streamURL={this.props.streamURL}/>
             </View>
           <View style={{
               flex: 1,

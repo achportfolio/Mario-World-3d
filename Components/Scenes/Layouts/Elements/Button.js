@@ -15,7 +15,7 @@ class Button extends React.Component {
   constructor() {
     super();
     this.state = { 
-      slideRight: new Animated.Value(1), 
+      slideDown: new Animated.Value(2), 
       fadeIn: new Animated.Value(0)
      };
     }
@@ -24,9 +24,9 @@ class Button extends React.Component {
     Animated.sequence([
       Animated.parallel([
         Animated.timing(
-          this.state.slideRight,{
+          this.state.slideDown,{
             toValue:0,
-            duration: 2000,
+            duration: 4000,
             easing: Easing.ease
            }
           ),
@@ -74,7 +74,7 @@ class Button extends React.Component {
             borderRadius: 0.1,
             opacity: this.state.fadeIn,
             transform: [
-                  {translateX:this.state.slideRight}
+                  {translateY:this.state.slideDown}
             ]
           }}>
             {currentScene === 2 ? (
@@ -101,7 +101,11 @@ class Button extends React.Component {
                 </Text>
               </VrButton>
             ) : (
-              <VrButton onClick={() => this.props.changeScenes(nextScene)}>
+              <VrButton onClick={() => this.props.changeScenes(nextScene)}
+              style={{
+                backgroundColor: '#d33b08'
+              }}
+              >
                 <Text
                   style={{
                     fontSize: 0.2,

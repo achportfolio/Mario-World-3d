@@ -1,5 +1,5 @@
 {
-  "name": "ButterflyVR",
+  "name": "MarioWorld3d",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "animate-components": "^1.4.8",
     "ovrui": "~2.0.0",
     "react": "16.0.0",
+    "react-live-clock": "^2.0.2",
     "react-native": "~0.48.0",
     "react-native-axios": "^0.17.1",
     "react-vr": "~2.0.0",

@@ -13,16 +13,16 @@ import {Easing} from 'react-native';
 class Title extends React.Component {
   constructor() {
     super();
-    this.state = {slideLeft:new Animated.Value(-1), fadeIn: new Animated.Value(0)}
+    this.state = {slideDown:new Animated.Value(2), fadeIn: new Animated.Value(0)}
   }
   
   componentDidMount() {
     Animated.sequence([
       Animated.parallel([
         Animated.timing(
-            this.state.slideLeft,{
+            this.state.slideDown,{
               toValue: 0,
-              duration: 2000,
+              duration: 4000,
               easing: Easing.ease
             }
           ),
@@ -46,10 +46,10 @@ class Title extends React.Component {
           color: "#FFFFFF",
           opacity: this.state.fadeIn,
           transform: [
-            {translateX: this.state.slideLeft}
+            {translateY: this.state.slideDown}
           ]
         }}>
-        Butterfly Video
+        Welcome to Mario's World
         </Animated.Text>
       </View>
     )

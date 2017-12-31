@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   View,
+  Text,
   Animated
 } from 'react-vr';
 
@@ -25,7 +26,8 @@ constructor(props) {
     text: this.props.text,
     selectionIndex: "",
     borderWidths: [0, 0, 0, 0, 0, 0],
-    stage: 1
+    stage: 1,
+    time: new Date().toLocaleString()
   };
 }
 
@@ -55,7 +57,6 @@ componentDidMount() {
   if(this.state.showButton === false) {
     this.setState({showButton: true});
   }
-
 
 switch (input) {
     case 1:
@@ -88,7 +89,8 @@ switch (input) {
     return (
         <View>
         <Animated.View style={{
-          width: 5,
+          width: 2,
+          height: 0.25,
           flexDirection: 'row',
           alignItems: 'flex-start',
           justifyContent: 'center',
@@ -96,17 +98,16 @@ switch (input) {
           opacity: this.state.fadeIn,
           transform: [{translateZ: -3},
                       {translateX: this.state.slideLeft}],
-          marginTop: -0.3
+          marginTop: -0.1,
+          backgroundColor: 'black'
         }}>
-          <MenuButtons />
-          <TileButtons
-            stage={this.state.stage}
-            environments={this.props.environments}
-            previews={this.props.previews}
-            updateStage={this.updateStage.bind(this)}
-            borderWidths={this.state.borderWidths}
-          />
-          <ProgressCircles color1={this.state.color1} color2={this.state.color2}/>
+          <Text
+          style={{
+            fontSize: 0.11,
+            margin: .06
+          }}>
+          Help mario hit the box by clicking him.
+          </Text>
         </Animated.View>
 
         <View style={{
