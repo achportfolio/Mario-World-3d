@@ -1,0 +1,47 @@
+import React from 'react';
+import {
+  Text,
+  View,
+  asset,
+  Pano
+} from 'react-vr';
+
+import FinalStageLayout from './Layouts/FinalStageLayout.js';  
+
+//Scene
+class Finalstage extends React.Component {
+  constructor() {
+    super();
+    this.state = {}
+  }
+
+  componentWillMount() {
+  }
+
+  render() {
+    return (
+        <View>
+        	<Pano source={asset('title-background.jpg')}/>
+          <View 
+          style={{
+            height:1,
+            width: 2,
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            justifyContent: 'center',
+            layoutOrigin: [0.5, 0.5],
+            transform: [{translate: [0, 0, -3]}],
+            backgroundColor: 'black',
+            marginTop: -1,
+            paddingLeft: 0.2,
+            paddingRight: 0.2
+          }}>
+            <FinalStageLayout counter={this.props.counter} scores={this.props.scores}/>
+          </View>
+        </View>
+      )
+  }
+}
+
+
+module.exports = Finalstage;

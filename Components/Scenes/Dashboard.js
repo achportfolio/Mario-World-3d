@@ -7,33 +7,44 @@ import {
   Video,
   Text,
   View,
-  Animated
+  Animated,
+  VrButton
 } from 'react-vr';
 
 import DashboardLayout from './Layouts/DashboardLayout.js';
 import MarioModel from './Models/MarioModel.js';
 import MarioBox from './Models/MarioBox.js';
-import Timer from './Models/Timer.js';
+import Timer from './Timer.js';
 import Score from './Models/Score.js';
 import Time from './Models/Time.js';
 
 class Dashboard extends React.Component {
+  constructor() {
+    super();
+    this.state={jump: new Animated.Value(-60), inertiaForward: new Animated.Value(-275)};
+  }
+
+  message(){
+    setTimeout(() => {
+      if(this.state.jump._value>-2 && this.state.inertiaForward._value<-200){this.props.changeScenes(3);};
+    }, 1000);
+  }
+
   render() {
     return (
         <View>
           <Pano source={asset('title-background.jpg')}/>
           <DashboardLayout
-            environments={this.props.environments}
-            captureSelection={this.props.captureSelection}
             text={this.props.text}
             changeScenes={this.props.changeScenes}
-            scene={this.props.scene}
           />
           <MarioBox/>
-          <MarioModel/>
+          <VrButton onClick={()=>{this.message()}}>
+            <MarioModel jump={this.state.jump} inertiaForward={this.state.inertiaForward}/>
+          </VrButton>
           <Score/>
           <Time/>
-          <Timer/>
+          <Timer counter={this.props.counter} finalTime={this.props.finalTime}/>
         </View>
       )
   }

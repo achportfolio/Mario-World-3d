@@ -6,27 +6,28 @@ import {
   View
 } from 'react-vr';
 
+import TimerInfo from './Layouts/TimerInfo.js';
+
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      time: new Date().getSeconds().toLocaleString(), Counter: 0
-    };
+    this.state={time: new Date().getSeconds().toLocaleString(), counterState: 0};
   }
   componentDidMount() {
     this.intervalID = setInterval(
       () => this.tick(),
       1000
     );
-
   }
   componentWillUnmount() {
     clearInterval(this.intervalID);
+    this.props.finalTime(this.state.counterState);
   }
+
   tick() {
     this.setState({
       time: new Date().getSeconds().toLocaleString(),
-      Counter: this.state.Counter +1
+      counterState: this.state.counterState +1
     });
   }
 
@@ -38,7 +39,7 @@ class Timer extends React.Component {
           transform: [
                 {translateX: 1},
                 {translateY: .5},
-                {translateZ: 0.093},
+                {translateZ: 0.28},
                 {rotateY: -90}
               ]
           }}>
@@ -49,8 +50,9 @@ class Timer extends React.Component {
                     textAlign: 'center',
                     color: "#FFFFFF"
           }}>
-            {this.state.Counter}
+            {this.state.counterState}
           </Text>
+          <TimerInfo TimerInfo={this.props.counter} />
         </View>
     );
   }

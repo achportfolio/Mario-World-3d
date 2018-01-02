@@ -13,20 +13,32 @@ import {
 
 import TitleScene from './Components/Scenes/TitleScene.js';
 import Dashboard from './Components/Scenes/Dashboard.js';
-import VideoPlayer from './Components/Scenes/VideoPlayer.js';
+import FinalStage from './Components/Scenes/FinalStage.js';
 import Cloud from './Components/Scenes/Models/Cloud.js';
-import axios from 'react-native-axios';
+import fire from './fire.js';
 
 export default class ButterflyVR extends React.Component {
   constructor() {
     super();
-    this.state={scene: 1, selectedEnv: "",
-    environments: ["title-background.jpg", "dashboard-background.jpg", "Arizona.jpg", "Hawaii.jpg", "New Hampshire.jpg", "Texas.jpg"]};
+    this.state={scene: 1, counter: 0, scores: []};
   }
 
   componentWillMount() {
+    /* Create reference to scores in Firebase Database */
+    let scoresRef = fire.database().ref('scores').orderByKey().limitToLast(5);
+    scoresRef.on('child_added', snapshot => {
+      /* Update React state when message is added at Firebase Database */
+      let score = { text: snapshot.val(), id: snapshot.key };
+      this.setState({ scores: [score].concat(this.state.scores) });
+    })
   }
-  
+
+  finalTime(endTime) {
+    this.setState({counter:endTime});
+    //this.setState({scores:[...this.state.scores, endTime]});
+    fire.database().ref('scores').push( this.endTime.value );
+    this.endTime.value = '';
+  }  
 
   changeScenes(nextScene, selectionIndex) {
   switch (nextScene) {
@@ -37,18 +49,7 @@ export default class ButterflyVR extends React.Component {
       this.setState({scene: 2});
       break;
     case 3:
-      this.captureSelection(2, selectionIndex);
       this.setState({scene: 3});
-      break;
-  }
-}
-
-  captureSelection(stage, value) {
-  switch (stage) {
-    case 1:
-      break;
-    case 2:
-      this.setState({selectedEnv: this.state.environments[value-1]});
       break;
   }
 }
@@ -69,21 +70,15 @@ export default class ButterflyVR extends React.Component {
       ) : (
         scene === 2 ? (
           <Dashboard
-            captureSelection={this.captureSelection.bind(this)}
-            environments={this.state.environments}
             showButton={false}
             text={"Select Environment"}
             changeScenes={this.changeScenes.bind(this)}
             scene={this.state.scene}
+            counter={this.state.counter}
+            finalTime={this.finalTime.bind(this)}
           />
         ) : (
-          <VideoPlayer
-            env={this.state.selectedEnv}
-            showButton={true}
-            text={"Back to Dashboard"}
-            changeScenes={this.changeScenes.bind(this)}
-            scene={this.state.scene}
-          />
+          <FinalStage counter={this.state.counter} scores={this.state.scores}/>
         )
       )}
     </View>

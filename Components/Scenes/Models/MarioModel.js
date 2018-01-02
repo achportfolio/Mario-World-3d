@@ -11,23 +11,46 @@ import {
 } from 'react-vr';
 
 import { Easing } from 'react-native';
+import TimerMixin from 'react-timer-mixin';
 
 class MarioModel extends React.Component {
-  constructor() {
-  	super();
+  constructor(props) {
+  	super(props);
 
-  	this.state= {spin: new Animated.Value(0), inertiaForward: new Animated.Value(-275),
-      inertiaSideways: new Animated.Value(-45), jump: new Animated.Value(-60)}
+  	this.state= {spin: new Animated.Value(0)};
+    this.flatCircleAnimation = new Animated.Value(0);
+
+    var range = 1, snapshot = 10, radius = 255;
+        /// translateX
+        var inputRange = [], outputRange = [];
+        for (var i=0; i<=snapshot; ++i) {
+            var value = i/snapshot;
+            var move = Math.sin(value * Math.PI * 2) * radius;
+            inputRange.push(value);
+            outputRange.push(move);
+        }
+        this.translateX = this.flatCircleAnimation.interpolate({ inputRange, outputRange });
+
+        /// translateY
+        var inputRange = [], outputRange = [];
+        for (var i=0; i<=snapshot; ++i) {
+            var value = i/snapshot;
+            var move = -Math.cos(value * Math.PI * 2) * radius;
+            inputRange.push(value);
+            outputRange.push(move);
+        }
+        this.translateY = this.flatCircleAnimation.interpolate({ inputRange, outputRange });
   }
 
   componentDidMount() {
-  	this.circularAnimation();
+  	this.spinAnimation();
+    this.flatCircleAnimations();
   }
 
   jumpAnimation() {
     Animated.sequence([
       Animated.timing(
-        this.state.jump,
+        this.props.jump,
         {
           toValue: 0,
           duration: 1000,
@@ -36,7 +59,7 @@ class MarioModel extends React.Component {
         ),
 
       Animated.timing(
-        this.state.jump,
+        this.props.jump,
         {
           toValue: -60,
           duration: 1000,
@@ -46,12 +69,9 @@ class MarioModel extends React.Component {
       ]).start();
   }
 
-  circularAnimation() {
+  spinAnimation() {
     this.state.spin.setValue(0);
-    this.state.inertiaForward.setValue(-275);
-    this.state.inertiaSideways.setValue(-45);
     Animated.sequence([
-      Animated.parallel([
         Animated.timing(
     	    this.state.spin,
     	    {
@@ -62,26 +82,6 @@ class MarioModel extends React.Component {
         ),
 
         Animated.timing(
-          this.state.inertiaForward,
-          {
-            toValue: 0,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        ),
-
-        Animated.timing(
-          this.state.inertiaSideways,
-          {
-            toValue: -275,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        )
-      ]),
-
-      Animated.parallel([
-        Animated.timing(
           this.state.spin,
           {
            toValue: 2,
@@ -89,27 +89,6 @@ class MarioModel extends React.Component {
            easing: Easing.linear
             }
         ),
-
-        Animated.timing(
-          this.state.inertiaForward,
-          {
-            toValue: 275,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        ),
-
-        Animated.timing(
-          this.state.inertiaSideways,
-          {
-            toValue: 0,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        )
-      ]),
-
-      Animated.parallel([
         Animated.timing(
           this.state.spin,
           {
@@ -118,27 +97,6 @@ class MarioModel extends React.Component {
            easing: Easing.linear
             }
         ),
-
-        Animated.timing(
-          this.state.inertiaForward,
-          {
-            toValue: 0,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        ),
-
-        Animated.timing(
-          this.state.inertiaSideways,
-          {
-            toValue: 255,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        )
-      ]),
-
-      Animated.parallel([
         Animated.timing(
           this.state.spin,
           {
@@ -146,40 +104,70 @@ class MarioModel extends React.Component {
            duration: 5200,
            easing: Easing.linear
             }
-        ),
-
-        Animated.timing(
-          this.state.inertiaForward,
-          {
-            toValue: -275,
-            duration: 5200,
-            easing: Easing.linear
-          }
-        ),
-
-        Animated.timing(
-          this.state.inertiaSideways,
-          {
-            toValue: -45,
-            duration: 5200,
-            easing: Easing.linear
-          }
         )
-      ])
-    ]).start( () => this.circularAnimation() );
+    ]).start( () => this.spinAnimation() );
   }
+
+  flatCircleAnimations() {
+        this.flatCircleAnimation.setValue(0);
+        this.props.inertiaForward.setValue(-275);
+
+         Animated.parallel([
+          Animated.sequence([
+            Animated.timing(
+              this.props.inertiaForward,
+              {
+               toValue: 0,
+               duration: 5200,
+               easing: Easing.linear
+                }
+            ),
+
+            Animated.timing(
+              this.props.inertiaForward,
+              {
+               toValue: 275,
+               duration: 5200,
+               easing: Easing.linear
+                }
+            ),
+
+            Animated.timing(
+              this.props.inertiaForward,
+              {
+               toValue: 0,
+               duration: 5200,
+               easing: Easing.linear
+                }
+            ),
+
+            Animated.timing(
+              this.props.inertiaForward,
+              {
+               toValue: -275,
+               duration: 5200,
+               easing: Easing.linear
+                }
+            ),
+          ]),
+
+          Animated.timing(this.flatCircleAnimation, {
+          toValue: 1,
+          duration: 20800
+        })
+        ]).start(() => this.flatCircleAnimations() );
+      }
 
   render() {
     const spin = this.state.spin.interpolate({
       inputRange: [0,1,2,3,4],
-      outputRange: ['0deg', '90deg', '180deg', '270deg', '360deg']
+      outputRange: ['0deg', '-90deg', '-180deg', '-270deg', '-360deg']
     })
 
     const AnimatedModel = Animated.createAnimatedComponent(Model);
 
     return (
-        <VrButton
-            onClick={() => {this.jumpAnimation()}}>
+        <VrButton onClick={() => {this.jumpAnimation()}}>
           <AnimatedModel
       		  source={{
       		    obj: asset('mario.obj'),
@@ -188,9 +176,9 @@ class MarioModel extends React.Component {
 
       		style={{
             transform: [
-      			      {translateX: this.state.inertiaSideways},
-                  {translateY: this.state.jump},
-                  {translateZ: this.state.inertiaForward},
+      			      {translateX: this.translateX},
+                  {translateY: this.props.jump},
+                  {translateZ: this.translateY},
       			      {rotateY: spin}
       			    ]
       	    }}
