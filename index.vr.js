@@ -35,7 +35,6 @@ export default class ButterflyVR extends React.Component {
 
   finalTime(endTime) {
     this.setState({counter:endTime});
-    //this.setState({scores:[...this.state.scores, endTime]});
     fire.database().ref('scores').push( endTime);
   }  
 
