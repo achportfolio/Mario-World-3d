@@ -18,9 +18,9 @@ class TitleScene extends React.Component {
     	<View>
         	<Pano source={asset('title-background.jpg')}>
            <Sound
-          //  volume={0.8}
-          //  loop = {true}
-          //  source={{mp3: asset('SuperMarioBros.mp3')}}
+            volume={0.8}
+            loop = {true}
+            source={{mp3: asset('SuperMarioBros.mp3')}}
           />
           </Pano>
         	<TitleLayout

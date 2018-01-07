@@ -26,9 +26,9 @@ export default class ButterflyVR extends React.Component {
   componentWillMount() {
     /* Create reference to scores in Firebase Database */
     let scoresRef = fire.database().ref('scores').orderByKey().limitToLast(5);
-    scoresRef.on('child_added', snapshot => {
+    scoresRef.on('child_added', () => {
       /* Update React state when message is added at Firebase Database */
-      let score = { text: snapshot.val(), id: snapshot.key };
+      let score = { text: this.state.counter, id: 'Mario' };
       this.setState({ scores: [score].concat(this.state.scores) });
     })
   }
@@ -36,8 +36,7 @@ export default class ButterflyVR extends React.Component {
   finalTime(endTime) {
     this.setState({counter:endTime});
     //this.setState({scores:[...this.state.scores, endTime]});
-    fire.database().ref('scores').push( this.endTime.value );
-    this.endTime.value = '';
+    fire.database().ref('scores').push( endTime);
   }  
 
   changeScenes(nextScene, selectionIndex) {
@@ -71,7 +70,6 @@ export default class ButterflyVR extends React.Component {
         scene === 2 ? (
           <Dashboard
             showButton={false}
-            text={"Select Environment"}
             changeScenes={this.changeScenes.bind(this)}
             scene={this.state.scene}
             counter={this.state.counter}

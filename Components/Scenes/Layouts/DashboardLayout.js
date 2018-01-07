@@ -8,9 +8,6 @@ import {
 } from 'react-vr';
 
 import { Easing } from 'react-native';
-import MenuButtons from './Elements/MenuButtons.js';
-import TileButtons from './Elements/TileButtons.js';
-import ProgressCircles from './Elements/ProgressCircles.js';
 import Button from './Elements/Button.js';
 
 //Layout
@@ -57,28 +54,7 @@ componentDidMount() {
   if(this.state.showButton === false) {
     this.setState({showButton: true});
   }
-
-switch (input) {
-    case 1:
-      this.setState({borderWidths: [0.05, 0, 0, 0, 0, 0], selectionIndex: 1});
-      break;
-    case 2:
-      this.setState({borderWidths: [0, 0.05, 0, 0, 0, 0], selectionIndex: 2});
-      break;
-    case 3:
-      this.setState({borderWidths: [0, 0, 0.05, 0, 0, 0], selectionIndex: 3});
-      break;
-    case 4:
-      this.setState({borderWidths: [0, 0, 0, 0.05, 0, 0], selectionIndex: 4});
-      break;
-    case 5:
-      this.setState({borderWidths: [0, 0, 0, 0, 0.05, 0], selectionIndex: 5});
-      break;
-    case 6:
-      this.setState({borderWidths: [0, 0, 0, 0, 0, 0.05], selectionIndex: 6});
-      break;
   }
-}
 
   updateScene() {
   this.props.captureSelection(this.state.stage, this.state.selectionIndex);
@@ -122,7 +98,6 @@ switch (input) {
           <Button
             updateScene={this.updateScene.bind(this)}
             showButton={this.state.showButton}
-            text={this.state.text}
             changeScenes={this.props.changeScenes}
             stage={this.state.stage}
             scene={this.props.scene}

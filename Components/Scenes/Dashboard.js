@@ -8,7 +8,8 @@ import {
   Text,
   View,
   Animated,
-  VrButton
+  VrButton,
+  Sound
 } from 'react-vr';
 
 import DashboardLayout from './Layouts/DashboardLayout.js';
@@ -26,16 +27,21 @@ class Dashboard extends React.Component {
 
   message(){
     setTimeout(() => {
-      if(this.state.jump._value>-2 && this.state.inertiaForward._value<-200){this.props.changeScenes(3);};
+      if(this.state.jump._value>-2 && this.state.inertiaForward._value<-180){this.props.changeScenes(3);};
     }, 1000);
   }
 
   render() {
     return (
         <View>
-          <Pano source={asset('title-background.jpg')}/>
+          <Pano source={asset('title-background.jpg')}>
+           <Sound
+            volume={0.8}
+            loop = {true}
+            source={{mp3: asset('MarioWorldOne.mp3')}}
+          />
+          </Pano>
           <DashboardLayout
-            text={this.props.text}
             changeScenes={this.props.changeScenes}
           />
           <MarioBox/>

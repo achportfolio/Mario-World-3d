@@ -20,7 +20,7 @@ class MarioModel extends React.Component {
   	this.state= {spin: new Animated.Value(0)};
     this.flatCircleAnimation = new Animated.Value(0);
 
-    var range = 1, snapshot = 10, radius = 255;
+    var range = 1, snapshot = 180, radius = 270;
         /// translateX
         var inputRange = [], outputRange = [];
         for (var i=0; i<=snapshot; ++i) {
@@ -110,7 +110,7 @@ class MarioModel extends React.Component {
 
   flatCircleAnimations() {
         this.flatCircleAnimation.setValue(0);
-        this.props.inertiaForward.setValue(-275);
+        this.props.inertiaForward.setValue(-360);
 
          Animated.parallel([
           Animated.sequence([
@@ -118,8 +118,7 @@ class MarioModel extends React.Component {
               this.props.inertiaForward,
               {
                toValue: 0,
-               duration: 5200,
-               easing: Easing.linear
+               duration: 5200
                 }
             ),
 
@@ -127,8 +126,7 @@ class MarioModel extends React.Component {
               this.props.inertiaForward,
               {
                toValue: 275,
-               duration: 5200,
-               easing: Easing.linear
+               duration: 5200
                 }
             ),
 
@@ -136,8 +134,7 @@ class MarioModel extends React.Component {
               this.props.inertiaForward,
               {
                toValue: 0,
-               duration: 5200,
-               easing: Easing.linear
+               duration: 5200
                 }
             ),
 
@@ -145,16 +142,16 @@ class MarioModel extends React.Component {
               this.props.inertiaForward,
               {
                toValue: -275,
-               duration: 5200,
-               easing: Easing.linear
+               duration: 5200
                 }
             ),
           ]),
 
           Animated.timing(this.flatCircleAnimation, {
           toValue: 1,
-          duration: 20800
-        })
+          duration: 20800,
+          easing: Easing.linear
+          })
         ]).start(() => this.flatCircleAnimations() );
       }
 

@@ -3,6 +3,7 @@ import {
   Text,
   View,
   asset,
+  Sound,
   Pano
 } from 'react-vr';
 
@@ -21,7 +22,13 @@ class Finalstage extends React.Component {
   render() {
     return (
         <View>
-        	<Pano source={asset('title-background.jpg')}/>
+        	<Pano source={asset('title-background.jpg')}>
+           <Sound
+            volume={0.8}
+            loop = {true}
+            source={{mp3: asset('MarioEndSong.mp3')}}
+          />
+          </Pano>
           <View 
           style={{
             height:1,
