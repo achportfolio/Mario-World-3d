@@ -27,7 +27,9 @@ class FinalStageLayout extends React.Component {
             <Text>
               You did it in {this.props.counter} seconds! 
             </Text>
-              And here are the other scores {this.props.scores.map(score => {score.score})}
+            <Text>
+              And here are the other scores {this.props.scores.map(score => <Text>{score.score}</Text>)}
+            </Text>
         </View>
       )
   }
