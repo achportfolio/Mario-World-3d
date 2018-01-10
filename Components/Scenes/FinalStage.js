@@ -7,7 +7,8 @@ import {
   Pano
 } from 'react-vr';
 
-import FinalStageLayout from './Layouts/FinalStageLayout.js';  
+import FinalStageLayout from './Layouts/FinalStageLayout.js';
+import MarioCastle from './Models/MarioCastle.js';
 
 //Scene
 class Finalstage extends React.Component {
@@ -31,7 +32,7 @@ class Finalstage extends React.Component {
           </Pano>
           <View 
           style={{
-            height:0.85,
+            height:1.15,
             width: 2,
             flexDirection: 'column',
             alignItems: 'stretch',
@@ -39,11 +40,12 @@ class Finalstage extends React.Component {
             layoutOrigin: [0.5, 0.5],
             transform: [{translate: [0, 0, -3]}],
             backgroundColor: 'black',
-            marginTop: -1,
+            marginTop: -0.8,
             paddingLeft: 0.2,
             paddingRight: 0.2
           }}>
             <FinalStageLayout counter={this.props.counter} scores={this.props.scores}/>
+            <MarioCastle />
           </View>
         </View>
       )
