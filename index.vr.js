@@ -24,7 +24,7 @@ export default class ButterflyVR extends React.Component {
   }
 
   componentWillMount() {
-    /* Create reference to scores in Firebase Database */
+    /* Create reference to scores in Firebase Database */ 
     let scoresRef = fire.database().ref('scores').orderByValue().limitToFirst(3);
   }
 
