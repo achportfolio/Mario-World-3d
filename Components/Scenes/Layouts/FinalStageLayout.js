@@ -18,7 +18,7 @@ class FinalStageLayout extends React.Component {
   componentWillMount() {
   }
 
-  ListItem(props) {
+  function ListItem(props) {
     <Text> Mario. {props.value}</Text>
   }
 
