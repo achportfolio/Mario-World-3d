@@ -19,7 +19,8 @@ class FinalStageLayout extends React.Component {
   }
 
   ListItem(score) {
-    <Text> Mario. {score}</Text>
+  let x = <Text> Mario. score </Text>;
+  return x;
   }
 
   render() {
@@ -32,7 +33,7 @@ class FinalStageLayout extends React.Component {
               You did it in {this.props.counter} seconds! 
             </Text>
             <Text>
-              And here are the other scores {this.props.scores.map((scores) => this.ListItem({scores}) )}
+              And here are the other scores {this.props.scores.map((scores) => {this.ListItem({scores})} )}
             </Text>
         </View>
       )
