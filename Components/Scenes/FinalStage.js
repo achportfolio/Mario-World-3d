@@ -31,7 +31,7 @@ class Finalstage extends React.Component {
           </Pano>
           <View 
           style={{
-            height:1,
+            height:0.85,
             width: 2,
             flexDirection: 'column',
             alignItems: 'stretch',
