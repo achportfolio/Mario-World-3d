@@ -55,7 +55,7 @@ class TitleLayout extends React.Component {
         <Animated.View
           style={{
               margin:0.1,
-
+              opacity: this.state.fadeIn,
               transform: [
               {translateY: this.state.slideDown}]
           }}>
