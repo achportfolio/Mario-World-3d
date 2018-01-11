@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-<script>
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDGyQC3I04aHcOA2d7TQhxMJfyILMJqqfs",
@@ -9,5 +9,7 @@ import firebase from 'firebase'
     storageBucket: "marioworld3d-faaed.appspot.com",
     messagingSenderId: "86458910176"
   };
-  firebase.initializeApp(config);
-</script>
+  
+var fire = firebase.initializeApp(config);
+
+export default fire;
