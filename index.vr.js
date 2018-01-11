@@ -40,7 +40,7 @@ export default class ButterflyVR extends React.Component {
     fire.database().ref('scores').push( endTime);
   }  
 
-  changeScenes(nextScene, selectionIndex) {
+  changeScenes(nextScene) {
   switch (nextScene) {
     case 1:
       this.setState({scene: 1});
@@ -77,7 +77,11 @@ export default class ButterflyVR extends React.Component {
             finalTime={this.finalTime.bind(this)}
           />
         ) : (
-          <FinalStage counter={this.state.counter} scores={this.state.scores}/>
+          <FinalStage 
+            counter={this.state.counter} 
+            scores={this.state.scores} 
+            changeScenes={this.changeScenes.bind(this)}
+          />
         )
       )}
     </View>

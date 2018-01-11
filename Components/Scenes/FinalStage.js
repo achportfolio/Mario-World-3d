@@ -4,6 +4,7 @@ import {
   View,
   asset,
   Sound,
+  VrButton,
   Pano
 } from 'react-vr';
 
@@ -40,11 +41,21 @@ class Finalstage extends React.Component {
             layoutOrigin: [0.5, 0.5],
             transform: [{translate: [0, 0, -3]}],
             backgroundColor: 'black',
-            marginTop: -0.2,
+            marginTop: -0.5,
             paddingLeft: 0.2,
             paddingRight: 0.2
           }}>
             <FinalStageLayout counter={this.props.counter} scores={this.props.scores}/>
+            <VrButton onClick={() => this.props.changeScenes(1)} style={{backgroundColor: '#d33b08',transform: [{translateY:-0.4}]}}>
+              <Text
+                  style={{
+                    fontSize: 0.2,
+                    textAlign: 'center',
+                    color: "#FFFFFF",
+                  }}>
+                play again
+              </Text>
+            </VrButton>
             <MarioCastle />
           </View>
         </View>
