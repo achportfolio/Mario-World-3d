@@ -33,9 +33,10 @@ class MarioCastle extends React.Component {
         texture = {asset('MarioCastle.png')}
     		style={{
           transform: [
-    			      {translateX: 0},
-                {translateY: 0},
-                {translateZ: -100}
+    			      {translateX: -305},
+                {translateY: -160},
+                {translateZ: -590},
+                {scale:8}
     			    ]
     	    }}
     		/>

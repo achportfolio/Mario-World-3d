@@ -39,8 +39,7 @@ class Button extends React.Component {
             margin: 0.1,
             paddingLeft: 0.2,
             paddingRight: 0.2, 
-            height: 0.3, 
-            Color: '#A482DF'
+            height: 0.3
           }}>
             {currentScene === 2 ? (<View></View>) : (
               <VrButton onClick={() => this.props.changeScenes(nextScene)}

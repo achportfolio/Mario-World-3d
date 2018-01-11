@@ -22,12 +22,12 @@ import Time from './Models/Time.js';
 class Dashboard extends React.Component {
   constructor() {
     super();
-    this.state={jump: new Animated.Value(-60), inertiaForward: new Animated.Value(-275)};
+    this.state={jump: new Animated.Value(-60), inertiaForward: new Animated.Value(-270)};
   }
 
   message(){
     setTimeout(() => {
-      if(this.state.jump._value>-2 && this.state.inertiaForward._value<-180){this.props.changeScenes(3);};
+      if(this.state.jump._value>-2 && this.state.inertiaForward._value<-248){this.props.changeScenes(3);};
     }, 1000);
   }
 

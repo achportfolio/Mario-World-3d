@@ -110,7 +110,7 @@ class MarioModel extends React.Component {
 
   flatCircleAnimations() {
         this.flatCircleAnimation.setValue(0);
-        this.props.inertiaForward.setValue(-360);
+        this.props.inertiaForward.setValue(-270);
 
          Animated.parallel([
           Animated.sequence([
@@ -125,7 +125,7 @@ class MarioModel extends React.Component {
             Animated.timing(
               this.props.inertiaForward,
               {
-               toValue: 275,
+               toValue: 270,
                duration: 5200
                 }
             ),
@@ -141,7 +141,7 @@ class MarioModel extends React.Component {
             Animated.timing(
               this.props.inertiaForward,
               {
-               toValue: -275,
+               toValue: -270,
                duration: 5200
                 }
             ),

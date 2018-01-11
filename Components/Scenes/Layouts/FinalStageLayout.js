@@ -4,9 +4,7 @@ import {
   View,
   asset,
   Pano
-} from 'react-vr';
-
-import Timing from './Elements/Timing.js';  
+} from 'react-vr'; 
 
 //Scene
 class FinalStageLayout extends React.Component {
@@ -21,10 +19,10 @@ class FinalStageLayout extends React.Component {
   render() {
     return (
         <View>
-            <Text>
-              Congratulations on Helping Mario hit the box! Luigi would be proud :) You did it in {this.props.counter} seconds!
+            <Text style={{marginTop:0.08, lineHeight: 1}}>
+              Congratulations on Helping Mario hit the box in {this.props.counter} seconds! Luigi would be proud :)
             </Text>
-            <Text>
+            <Text style={{marginTop:0.08, lineHeight: 1}}>
               Here are the top 3 scores {this.props.scores.map((scores) => (<Text>       Mario: {scores}                      </Text>) )}
             </Text>
         </View>

@@ -40,7 +40,7 @@ class Finalstage extends React.Component {
             layoutOrigin: [0.5, 0.5],
             transform: [{translate: [0, 0, -3]}],
             backgroundColor: 'black',
-            marginTop: -0.8,
+            marginTop: -0.2,
             paddingLeft: 0.2,
             paddingRight: 0.2
           }}>

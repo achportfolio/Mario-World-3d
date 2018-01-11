@@ -6,8 +6,6 @@ import {
   View
 } from 'react-vr';
 
-import TimerInfo from './Layouts/TimerInfo.js';
-
 class Timer extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +50,6 @@ class Timer extends React.Component {
           }}>
             {this.state.counterState}
           </Text>
-          <TimerInfo TimerInfo={this.props.counter} />
         </View>
     );
   }

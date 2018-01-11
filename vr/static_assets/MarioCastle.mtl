@@ -2,10 +2,28 @@
 
 newmtl White
 Kd 1.000000 1.000000 1.000000
-map_Kd Mario-Castle.png
+map_Kd MarioCastle.png
 
 newmtl White_0
 Kd 0.878431 0.878431 0.878431
 
-newmtl White_1
+newmtl White
 Kd 1.000000 1.000000 1.000000
+map_Kd MarioCastle.png
+
+newmtl White_0
+Kd 0.878431 0.878431 0.878431
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
+map_Kd MarioCastle.png
+
+newmtl White_0
+Kd 0.878431 0.878431 0.878431
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
+map_Kd MarioCastle.png
+
+newmtl White_0
+Kd 0.878431 0.878431 0.878431
