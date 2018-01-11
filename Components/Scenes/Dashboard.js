@@ -22,7 +22,7 @@ import Time from './Models/Time.js';
 class Dashboard extends React.Component {
   constructor() {
     super();
-    this.state={jump: new Animated.Value(-60), inertiaForward: new Animated.Value(-270)};
+    this.state={jump: new Animated.Value(-67), inertiaForward: new Animated.Value(-270)};
   }
 
   message(){

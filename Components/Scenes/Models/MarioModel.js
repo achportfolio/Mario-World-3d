@@ -61,7 +61,7 @@ class MarioModel extends React.Component {
       Animated.timing(
         this.props.jump,
         {
-          toValue: -60,
+          toValue: -67,
           duration: 1000,
           easing: Easing.linear
         }
