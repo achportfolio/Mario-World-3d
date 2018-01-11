@@ -1,4 +1,4 @@
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+import firebase from 'firebase'
 <script>
   // Initialize Firebase
   var config = {
