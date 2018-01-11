@@ -15,7 +15,7 @@ import TitleScene from './Components/Scenes/TitleScene.js';
 import Dashboard from './Components/Scenes/Dashboard.js';
 import FinalStage from './Components/Scenes/FinalStage.js';
 import Cloud from './Components/Scenes/Models/Cloud.js';
-import fire from './fire.js';
+import fire from './fire.js'; 
 
 export default class ButterflyVR extends React.Component {
   constructor() {

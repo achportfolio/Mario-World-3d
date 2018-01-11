@@ -1,14 +1,13 @@
-import firebase from 'firebase'
-
-var config = { 
-    apiKey: "AIzaSyAym-AbH9VSvUs1gNgP1j3YjYhJHSp4U_s",
-    authDomain: "butterfly-vr.firebaseapp.com",
-    databaseURL: "https://butterfly-vr.firebaseio.com",
-    projectId: "butterfly-vr",
-    storageBucket: "butterfly-vr.appspot.com",
-    messagingSenderId: "497056695439"
-};
-
-var fire = firebase.initializeApp(config);
-
-export default fire;
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDGyQC3I04aHcOA2d7TQhxMJfyILMJqqfs",
+    authDomain: "marioworld3d-faaed.firebaseapp.com",
+    databaseURL: "https://marioworld3d-faaed.firebaseio.com",
+    projectId: "marioworld3d-faaed",
+    storageBucket: "marioworld3d-faaed.appspot.com",
+    messagingSenderId: "86458910176"
+  };
+  firebase.initializeApp(config);
+</script>
