@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "butterfly-vr"
+    "default": "butterfly-vr",
+    "marioworld3d": "butterfly-vr"
   }
 }
