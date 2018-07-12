@@ -50,6 +50,7 @@ class Cloud extends React.Component {
       inputRange: [0, 200],
       outputRange: [-100, 100]
     });
+    
     const AnimatedModel2 = Animated.createAnimatedComponent(Model);
 
     return (
